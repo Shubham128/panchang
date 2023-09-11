@@ -1,0 +1,304 @@
+<!doctype html>
+<%- include('../layouts/top_header') %>
+
+  <style>
+    .form-switch {
+        padding-left: 0.5rem !important;
+    }
+  .form-check-input:checked {
+    background-size: 1.4rem !important;
+    background-color: #e73801 !important;
+    width: 3rem !important;
+    height: 1.4rem !important;
+  }
+  .form-check-input{
+    background-size: 1.4rem !important;
+    width: 3rem !important;
+    height: 1.4rem !important;
+  }
+
+  .clf {
+    padding: 0px 0px 0px 7px;
+    position: absolute;  
+    width: 22px!important;
+    height: 22px!important;
+    background: #0064ff;
+    border-radius: 50%;
+    color: #fff;
+  }
+  .vos {
+    padding: 0px 0px 0px 7px;
+    position: absolute;  
+    width: 22px!important;
+    height: 22px!important;
+    background: #0064ff;
+    border-radius: 50%;
+    color: #fff;
+  }
+  
+  
+  </style>
+  <body class="layout-fluid theme-light">
+    <div class="page">
+      <%- include('../layouts/header') %>
+
+        <div class="page-wrapper">
+          <% if(error.length>0){ %>
+            <script>new Toasteur("top-right", 3000).error(" <%= error %>", 'Error!');</script>
+               
+            <% } %>
+
+        <% if(success.length>0){ %>
+                <script>new Toasteur("top-right", 3000).success(" <%= success %>", 'Success!');</script>
+                <% } %>    
+          <!-- Page header -->
+          <div class="page-header d-print-">
+            <div class="container-xl">
+              <div class="row g-2 align-items-center">
+
+                <div class="col">
+                  <!-- Page pre-title -->
+                 
+                  <h2 class="page-title">
+                  Panchang
+                  </h2>
+                </div>
+
+                <div class="col-auto ms-auto d-print-">
+                  <div class="col-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                      
+                      <a href="/addPackageService" class="btn btn-primary d-sm-inline-block d-sm-none " >
+                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
+                        Create new Package
+                      </a>
+                      <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#add" aria-label="Create new report">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
+                      </a>
+                    </div>
+                  </div>
+                  </div>
+               
+
+              </div>
+            </div>
+          </div>
+          <!-- Page body -->
+          <div class="page-body">
+            <div class="container-xl">
+              
+              <div class="col-12">
+                <div class="row row-cards">
+                  <center >
+                      <div class="col-md-5 center">
+                        <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title">  Create new Pachang</h3>
+                        </div>
+                        <form  method="post" class="card" name="add_block"  id="addBlock"  action="/addBlocksSrv">
+
+                          <div class="card-body form-fieldset">
+                           
+                              <div class="row">
+                                  <div class="col-xl-12">
+                                      <div class="row ">
+                                       <fieldset class="form-fieldset">
+
+                                        <div class="row">
+                                              <div class="col-xl-6">
+                                                  <label class="form-label required">To Date:</label>
+                                                  <input type="date" name="block_name" id="block_name" class="form-control" autocomplete="off" placeholder="Enter the Block Name">
+                                              </div>
+                                              <div class="col-xl-6">
+                                                <label class="form-label required">From Date:</label>
+                                                <input type="date" name="block_name" id="block_name" class="form-control" autocomplete="off" placeholder="Enter the Block Name">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                              <label class="form-label required">etc 1:</label>
+                                              <input type="text" name="block_name" id="block_name" class="form-control" autocomplete="off" placeholder="Enter the  Name">
+                                          </div>
+                                          <div class="col-xl-6">
+                                            <label class="form-label required">etc 2:</label>
+                                            <input type="text" name="block_name" id="block_name" class="form-control" autocomplete="off" placeholder="Enter the  Name">
+                                        </div></div>
+                                             
+                                              <!-- <div class="col-xl-12">
+                                                <label class="form-label required">Amount:</label>
+                                                <input type="text" name="amount" id="amount" class="form-control" autocomplete="off" placeholder="Enter the Amount">
+                                            </div> -->
+                                        </fieldset>
+                                      </div>
+                                  </div>
+                              </div>
+                           
+                          </div>
+                        
+                          <div class="card-footer text-end">
+                              <center >
+                                  <a href="#" class="btn btn-warning">Cancel</a>
+                                  <a href="/Panchang"class="btn btn-primary" >Create</a>
+                              </center>
+                          </div>
+                      </form>
+
+                      </div>
+                      </div>
+                  
+                  
+                </div>
+              </div>
+            </center>
+            </div>
+          </div>
+          <%- include('../layouts/footer') %>
+        </div>
+    </div>
+  </body>
+
+<!--Start function on chage Time Slot status  -->
+  <script>
+
+function validateform() {
+    
+    var state_name = document.getElementById('state_name').value;
+    var city_name = document.getElementById('city_name').value;
+    var block_name = document.getElementById('block_name').value;
+    //var amount = document.getElementById('amount').value;
+
+     if(state_name =='')
+      {
+        new Toasteur("top-right", 3000).error("State Name is required", 'Error!');
+        $('#state_name').focus();
+        return false;
+      }
+     if(city_name =='')
+      {
+        new Toasteur("top-right", 3000).error("City Name is required", 'Error!');
+        $('#city_name').focus();
+        return false;
+      }
+     if(block_name =='')
+      {
+        new Toasteur("top-right", 3000).error("Block Name is required", 'Error!');
+        $('#block_name').focus();
+        return false;
+      } 
+    //  if(amount =='')
+    //   {
+    //     new Toasteur("top-right", 3000).error("Amount Name is required", 'Error!');
+    //     $('#amount').focus();
+    //     return false;
+    //   }
+      
+  else{
+     
+      $("#addBlock").submit();  
+      $("#loader").show();  
+      return true;
+
+      }
+  }
+
+// block alphabets and special character //
+function isNumber(evt) {
+evt = (evt) ? evt : window.event;
+var charCode = (evt.which) ? evt.which : evt.keyCode;
+if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+
+  swal({
+    title: "Error",
+    text: "Only Number allowed!",
+    type: "error",
+    timer: 1500,
+    showCancelButton: true,
+    confirmButtonClass: 'btn-danger',
+  });
+  return false;
+}
+return true;
+}
+
+
+function checkConfirm(id) {
+
+var rowId  = id;
+ var y = confirm('Are you sure you want delete.');
+ if(y)
+   {
+     $.ajax({
+      type: 'get', // Type of request to be send, called as method
+      url: '/deleteloantype/?rowid='+rowId, //  Url to which the request is send
+      dataType: 'json',
+      success: function (responce) { // A function to be called if request succeeds.
+       if(responce == 1){
+         new Toasteur("top-right", 3000).success("Selected row Deleted Suceesfully", 'Success');
+         $("#rowid_"+rowId).hide();
+         setTimeout(function(){
+            window.location.reload(1);
+          }, 3000);
+       }else{
+         new Toasteur("top-right", 3000).error("Somthing Went wrong Please try again", 'Error!');
+         setTimeout(function(){
+            window.location.reload(1);
+          }, 3000);
+       }
+      }
+   });
+ }
+
+}    
+
+  $(document).on('change', '.change_timeslot_status', function () { 
+    var status = $(this).val();
+    var rel_id = $(this).attr('rel_id');
+    var success = confirm('Are you sure you want to change Time Slot status?');
+      if(success)
+      {
+          if (status != "" && (rel_id != 0 || rel_id != "")) {
+            $.ajax({
+              type: 'get', // Type of request to be send, called as method
+              url: '/changetimeSlotStaus/?rowid='+rel_id+'&status='+status, //  Url to which the request is send
+              dataType: 'json',
+              success: function (responce) { // A function to be called if request succeeds.
+                if(responce == 1){
+                  new Toasteur("top-right", 3000).success("Time Status changed Suceesfully", 'Success');
+                  setTimeout(function(){
+                      window.location.reload(1);
+                    }, 3000);
+                }else{
+                  new Toasteur("top-right", 3000).error("Somthing Went wrong Please try again", 'Error!');
+                  setTimeout(function(){
+                      window.location.reload(1);
+                    }, 3000);
+                }
+              }
+            });
+
+          }
+      }  
+      else
+      {
+          return false; 
+      }
+  });
+
+
+
+  ClassicEditor
+    .create( document.querySelector( '#item_description' ) )
+    .then( editor => {
+            console.log( editor );
+
+    } )
+    .catch( error => {
+            console.error( error );
+    } );
+
+  
+  </script>
+<!--End function on chage Time Slot status  -->  
+    

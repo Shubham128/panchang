@@ -1,0 +1,176 @@
+<!doctype html>
+<style>
+  .ck-editor__editable_inline {
+      min-height: 150px;
+  }
+  </style>
+<%- include('../layouts/top_header') %>
+
+  <body class="layout-fluid theme-light">
+    <div class="page">
+      <%- include('../layouts/header') %>
+
+        <div class="page-wrapper">
+          <% if(error.length>0){ %>
+            <script>new Toasteur("top-right", 3000).error(" <%= error %>", 'Error!');</script>
+               
+            <% } %>
+
+        <% if(success.length>0){ %>
+                <script>new Toasteur("top-right", 3000).success(" <%= success %>", 'Success!');</script>
+                <% } %>    
+          <!-- Page header -->
+          <div class="page-header d-print-none">
+            <div class="container-xl">
+              <div class="row g-2 align-items-center">
+
+                <div class="col">
+                  <!-- Page pre-title -->
+                  <div class="page-pretitle">
+                    <a href="/dashboard">Dashboard</a>
+                  </div>
+                  <h2 class="page-title">
+                    Edit district
+                  </h2>
+                </div>
+
+                <div class="col-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                      
+                      <a href="/districtList" class="btn btn-primary d-none d-sm-inline-block">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                         Back To List
+                      </a>
+                      <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#add" aria-label="Create new report">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
+                      </a>
+                    </div>
+                  </div>
+               
+
+              </div>
+            </div>
+          </div>
+          <!-- Page body -->
+
+          <div class="page-body">
+            <div class="container-xl">
+              <div class="col-12">
+                <div class="row row-cards">
+                    <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">Edit district</h3>
+                          </div>
+                          <%  
+                         
+                
+                for (let l of counterlist)
+                  { %> 
+                         
+                          <form  method="post" class="card" name="add_clf"  id="adddistrict"  action="/updatedistrict">
+                            <fieldset class="form-fieldset">
+                            <div class="container">
+                             
+                              <div class="row">
+                                
+                                
+                                
+                                
+                                <div class="col-sm-6">
+                                    <label class="form-label required">District Name:</label>
+                                    <input type="text" name="district_name" id="district_name" value="<%=(typeof l!='undefined')? l.district_name:''%>" class="form-control" autocomplete="off" placeholder="Enter the district Name">
+                                </div>
+                                
+                                  <div class="col-sm-6">
+                                    <label class="form-label required">status :</label>
+                                      <select class="form-control form-select"  name="status" id="status">
+                                        <% for (let s of counterlist)
+                                              {
+                                            if(s.id==1){
+                                              %>
+                                              <option value="<%= s.id %>" >
+                                              active
+                                              </option>
+                                              <% }else {
+                                             %>
+                                             <option value="<%= s.id %>" >
+                                                deactive
+                                                </option>
+                                                <% } }%>
+                                      </select>
+                                  </div>
+                              </div>
+                           
+                            </div>
+                          </fieldset>
+                          <div class="card-footer text-end">
+                            <center >
+                              <a href="#" class="btn btn-warning">Cancel</a>
+                              <button type="button" class="btn btn-primary" onclick="validateform()" >Save</button>
+                           </center>
+                          </div>
+                      </form> 
+                      <%  } %>
+                      </div>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+          <%- include('../layouts/footer') %>
+        </div>
+    </div>
+  </body>
+
+  <script>
+    function validateform() 
+    {
+      
+    var vo_name = $('#district_name').val();
+    var block_name = $('#status').val();
+    
+    if(vo_name =='')
+      {
+        new Toasteur("top-right", 3000).error("Vo name is required", 'Error!');
+        $('#vo_name').focus();
+        return false;
+      }
+   
+     if(block_name =='')
+      {
+        new Toasteur("top-right", 3000).error("Block name is required", 'Error!');
+        $('#status').focus();
+        return false;
+      } 
+      
+      else
+      {
+       $("#adddistrict").submit();  
+       //$("#loader").show();  
+        return true;
+      }
+  }
+
+// block alphabets and special character //
+function isNumber(evt) {
+  evt = (evt) ? evt : window.event;
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+
+    swal({
+      title: "Error",
+      text: "Only Number allowed!",
+      type: "error",
+      timer: 1500,
+      showCancelButton: true,
+      confirmButtonClass: 'btn-danger',
+    });
+    return false;
+  }
+  return true;
+}
+    
+    </script>
+    

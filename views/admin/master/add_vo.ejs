@@ -1,0 +1,337 @@
+<!doctype html>
+<style>
+  .ck-editor__editable_inline {
+      min-height: 150px;
+  }
+  </style>
+<%- include('../layouts/top_header') %>
+
+  <body class="layout-fluid theme-light">
+    <div class="page">
+      <%- include('../layouts/header') %>
+
+        <div class="page-wrapper">
+          <% if(error.length>0){ %>
+            <script>new Toasteur("top-right", 3000).error(" <%= error %>", 'Error!');</script>
+               
+            <% } %>
+
+        <% if(success.length>0){ %>
+                <script>new Toasteur("top-right", 3000).success(" <%= success %>", 'Success!');</script>
+                <% } %>    
+          <!-- Page header -->
+          <div class="page-header d-print-none">
+            <div class="container-xl">
+              <div class="row g-2 align-items-center">
+
+                <div class="col">
+                  <!-- Page pre-title -->
+                  <div class="page-pretitle">
+                    <a href="/dashboard">Dashboard</a>
+                  </div>
+                  <h2 class="page-title">
+                    Add New VO
+                  </h2>
+                </div>
+
+                <div class="col-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                      
+                      <a href="/volist" class="btn btn-primary d-none d-sm-inline-block">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                         Back To List
+                      </a>
+                      <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#add" aria-label="Create new report">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
+                      </a>
+                    </div>
+                  </div>
+               
+
+              </div>
+            </div>
+          </div>
+          <!-- Page body -->
+
+          <div class="page-body">
+            <div class="container-xl">
+              <div class="col-12">
+                <div class="row row-cards">
+                    <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">Add VO</h3>
+                          </div>
+                         
+                          <form  method="post" class="card" name="addvo"  id="addvo"  action="/addvo">
+                            <fieldset class="form-fieldset">
+                            <div class="container">
+                             
+                              <div class="row">
+                                <div class="col-sm-4">
+                                  <label class="form-label required">Village Organization(VO) Name:</label>
+                                  <input type="text" name="vo_name" id="vo_name" class="form-control" autocomplete="off" placeholder="Enter vo Name">
+                                </div>
+                                <div class="col-sm-4">
+                                  <label class="form-label required">Block Name :</label>
+                                    <select class="form-control form-select"  name="block_id" id="block_id">
+                                      <option value="">Select Block</option>
+                                      <% for (let s of allblockdata)
+                                              {
+                                              %>
+                                              <option value="<%= s.id %>" >
+                                              <%= s.block_name %> 
+                                              </option>
+                                              <% } %>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <label class="form-label required">CLF Name :</label>
+                                    <select class="form-control form-select"  name="clf_id" id="clf_id">
+                                      <option value="">Select Clf</option>
+                                      <% for (let s of clfdatas)
+                                              { 
+                                              %>
+                                              <option value="<%= s.id %>" >
+                                              <%= s.name %> 
+                                              </option>
+                                              <% } %>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <label class="form-label required">Date Of Formation:</label>
+                                  <input type="date" name="date_of_formation" id="date_of_formation" class="form-control" autocomplete="off" placeholder="Enter the CLF Name">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="form-label required">Reg. No</label>
+                                    <input type="text" name="reg_number" id="reg_number" class="form-control" autocomplete="off" placeholder="Enter the Reg No">
+                                </div>
+                                <div class="col-sm-4">
+                                  <label class="form-label required">Pan No</label>
+                                  <input type="text" name="pan_number" id="pan_number" class="form-control" autocomplete="off" placeholder="Enter the Pan No">
+                                </div>
+                                <div class="col-sm-4">
+                                  <label class="form-label required">GSTIN No</label>
+                                  <input type="text" name="gstin_number" id="gstin_number" class="form-control" autocomplete="off" placeholder="Enter the GSTIN No">
+                                </div>
+                                <div class="col-sm-4">
+                                  <label class="form-label required">A/C No</label>
+                                  <input type="text" name="saving_account_number" id="saving_account_number" class="form-control" autocomplete="off" placeholder="Enter the A/c No">
+                                </div>
+                                <div class="col-sm-4">
+                                  <label class="form-label required">Bank Name</label>
+                                  <input type="text" name="bank_name" id="bank_name" class="form-control" autocomplete="off" placeholder="Enter the Bank Name">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="form-label required">Branch Name</label>
+                                    <input type="text" name="branch_name" id="branch_name" class="form-control" autocomplete="off" placeholder="Enter the Branch Name">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="form-label required">IFSC Code</label>
+                                    <input type="text" name="ifsc_code" id="ifsc_code" class="form-control" autocomplete="off" placeholder="Enter the IFSC Code">
+                                </div>
+                              </div>
+                              <div class="col-sm-12">
+                                <label class="form-label required">Address:</label>
+                                <textarea id="address" name="address" class="form-control" rows="4" cols="50"> </textarea>
+                              </div>
+                            </div>
+                          </fieldset>
+                          <div class="card-footer text-end">
+                            <center >
+                              <a href="/volist" class="btn btn-warning">Cancel</a>
+                              <button type="button" class="btn btn-primary"  id="validateButton"onclick="validateform()" >Save</button>
+                           </center>
+                          </div>
+                      </form> 
+                      </div>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+          <%- include('../layouts/footer') %>
+        </div>
+    </div>
+  </body>
+  <!-- <script>
+    $(document).ready(function() {
+      $('#validateButton').click(function() {
+        var panNumber = $('#panNumberInput').val().trim();
+        
+        // PAN number validation regular expression
+        var panRegex = /^([A-Z]{5}[0-9]{4}[A-Z]{1})$/;
+        
+        if (panNumber === '') {
+          showMessage('Please enter a PAN number');
+        } else if (!panRegex.test(panNumber)) {
+          showMessage('Invalid PAN number');
+        } else {
+          showMessage('PAN number is valid');
+        }
+      });
+      
+      function showMessage(message) {
+        $('#messageContainer').text(message);
+      }
+    });
+    </script> -->
+    
+  <script>
+    
+
+    
+    function validateform() 
+    {
+      var panRegex = /^([A-Z]{5}[0-9]{4}[A-Z]{1})$/;
+      var gstRegex =/^([0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[A-Z]{1}[0-9]{1})$/;
+      var ifscRegex =/^([A-Za-z]{3,5}0[A-Z0-9a-z]{6,9})$/;
+    var vo_name = $('#vo_name').val();
+    var block_name = $('#block_id').val();
+    var clf_name = $('#clf_id').val();
+    var date_of_formation = $('#date_of_formation').val();
+    var reg_number = $('#reg_number').val();
+    var pan_number = $('#pan_number').val();
+    var gstin_number = $('#gstin_number').val();
+    var saving_account_number = $('#saving_account_number').val();
+    var bank_name = $('#bank_name').val();
+    var branch_name = $('#branch_name').val();
+    var ifsc_code = $('#ifsc_code').val();
+    var address = $('#address').val();
+    if(vo_name =='')
+      {
+        new Toasteur("top-right", 3000).error("Vo name is required", 'Error!');
+        $('#vo_name').focus();
+        return false;
+      }
+   
+     if(block_name =='')
+      {
+        new Toasteur("top-right", 3000).error("Block name is required", 'Error!');
+        $('#block_id').focus();
+        return false;
+      } 
+      if(clf_name =='')
+      {
+        new Toasteur("top-right", 3000).error("Clf name is required", 'Error!');
+        $('#clf_name').focus();
+        return false;
+      }
+      if(date_of_formation =='')
+      {
+        new Toasteur("top-right", 3000).error("date of formation is required", 'Error!');
+        $('#date_of_formation').focus();
+        return false;
+      }  
+
+        if(reg_number =='')
+      {
+        new Toasteur("top-right", 3000).error("Vo registration number is required", 'Error!');
+        $('#reg_number').focus();
+        return false;
+      }
+   
+        if(pan_number =='')
+      {
+        new Toasteur("top-right", 3000).error("pan number is required", 'Error!');
+        $('#pan_number').focus();
+        return false;
+      } 
+      else if (!panRegex.test(pan_number)) {
+          new Toasteur("top-right", 3000).error("Invalid PAN number", 'Error!');
+        $('#pan_number').focus();
+        return false;
+        }
+        
+      else{
+       
+        }
+      
+   
+    
+
+      if(gstin_number =='')
+      {
+        new Toasteur("top-right", 3000).error("gstin number is required", 'Error!');
+        $('#gstin_number').focus();
+        return false;
+      }
+      else if (!gstRegex.test(gstin_number)) {
+          new Toasteur("top-right", 3000).error("Invalid GST number", 'Error!');
+        $('#gstin_number').focus();
+        return false;
+        }
+        
+      else{
+       
+        }
+      if(saving_account_number =='')
+      {
+        new Toasteur("top-right", 3000).error("bank account number is required", 'Error!');
+        $('#saving_account_number').focus();
+        return false;
+      } 
+      if(bank_name =='')
+      {
+        new Toasteur("top-right", 3000).error("bank name is required", 'Error!');
+        $('#bank_name').focus();
+        return false;
+      } 
+      if(branch_name =='')
+      {
+        new Toasteur("top-right", 3000).error("bank branch name is required", 'Error!');
+        $('#branch_name').focus();
+        return false;
+      } 
+      if(ifsc_code =='')
+      {
+        new Toasteur("top-right", 3000).error("branch ifsc code is required", 'Error!');
+        $('#ifsc_code').focus();
+        return false;
+      }  
+
+      else if (!ifscRegex.test(ifsc_code)) {
+          new Toasteur("top-right", 3000).error("Invalid ifsc code number", 'Error!');
+        $('#ifsc_code').focus();
+        return false;
+        }
+        
+      else{
+       
+        }
+      if(address =='')
+      {
+        new Toasteur("top-right", 3000).error("vo address is required", 'Error!');
+        $('#address').focus();
+        return false;
+      } 
+      else
+      {
+       $("#addvo").submit();  
+       //$("#loader").show();  
+        return true;
+      }
+  }
+
+// block alphabets and special character //
+function isNumber(evt) {
+  evt = (evt) ? evt : window.event;
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+
+    swal({
+      title: "Error",
+      text: "Only Number allowed!",
+      type: "error",
+      timer: 1500,
+      showCancelButton: true,
+      confirmButtonClass: 'btn-danger',
+    });
+    return false;
+  }
+  return true;
+}
+    
+    </script>
+    
